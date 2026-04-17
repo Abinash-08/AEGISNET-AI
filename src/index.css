@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Helvetica:wght@300;400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  --font-serif: "Georgia", serif;
+  --font-mono: "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
+
+  --color-background: #050505;
+  --color-primary: #00F0FF;
+  --color-primary-muted: rgba(0, 240, 255, 0.2);
+  
+  --color-on-surface: #FFFFFF;
+  --color-on-surface-variant: #888888;
+  --color-grid-line: rgba(255, 255, 255, 0.1);
+
+  --color-sidebar: #0a0a0a;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-surface font-display selection:bg-primary/30 antialiased;
+  }
+}
+
+@layer components {
+  .rail-border {
+    @apply border-grid-line;
+  }
+  
+  .editorial-pill {
+    @apply border border-primary px-3 py-1 rounded-full text-[11px] uppercase tracking-widest text-primary;
+  }
+
+  .data-meter {
+    @apply h-[2px] bg-grid-line w-full relative mt-1;
+  }
+
+  .data-meter-fill {
+    @apply absolute h-full bg-primary transition-all duration-1000;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .holographic-panel {
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 240, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .holographic-panel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      transparent 0%,
+      rgba(0, 240, 255, 0.03) 50%,
+      transparent 100%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .neural-pulse-bg {
+    animation: neural-pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes neural-pulse {
+    0%, 100% { opacity: 0.02; transform: scale(1); }
+    50% { opacity: 0.08; transform: scale(1.05); }
+  }
+
+  .scanline-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 240, 255, 0.03) 50%, transparent 100%);
+    background-size: 100% 200%;
+    animation: scanmove 4s linear infinite;
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  @keyframes scanmove {
+    0% { background-position: 0 -100%; }
+    100% { background-position: 0 100%; }
+  }
+}
